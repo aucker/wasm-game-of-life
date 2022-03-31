@@ -3,9 +3,7 @@ mod utils;
 use core::fmt;
 
 use wasm_bindgen::prelude::*;
-extern crate js_sys;
-extern crate fixedbitset;
-use fixedbitset::FixedBitSet;
+
 
 // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
 // allocator.
@@ -13,15 +11,6 @@ use fixedbitset::FixedBitSet;
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
-// #[wasm_bindgen]
-// extern {
-//     fn alert(s: &str);
-// }
-
-// #[wasm_bindgen]
-// pub fn greet(name: &str) {
-//     alert(&format!("Hello, {}! this is a greeting from browser", name));
-// }
 
 #[wasm_bindgen]
 #[repr(u8)]
@@ -90,13 +79,7 @@ impl Universe {
                     (otherwise, _) => otherwise,
                 };
                 next[idx] = next_cell;
-                // next.set(idx, match (cell, live_neighbors) {
-                //     (true, x) if x < 2 => false,
-                //     (true, 2) | (true, 3) => true,
-                //     (true, x) if x > 3 => false,
-                //     (false, 3) => true,
-                //     (otherwise, _) => otherwise
-                // });
+                
             }
         }
         self.cells = next;
@@ -106,11 +89,6 @@ impl Universe {
         let width = 64;
         let height = 64;
 
-        // let size = (width * height) as usize;
-        // let mut cells = FixedBitSet::with_capacity(size);
-        // for i in 0..size {
-        //     cells.set(i, i % 2 == 0 || i % 7 == 0);
-        // }
 
         let cells = (0..width*height) 
                 .map(|i|{
@@ -119,11 +97,6 @@ impl Universe {
                 } else {
                     Cell::Dead
                 }
-                // if js_sys::Math::random() < 0.5 {
-                //     Cell::Alive
-                // } else {
-                //     Cell::Dead
-                // }
             })
             .collect();
         Universe { width, height, cells }
@@ -141,9 +114,7 @@ impl Universe {
     pub fn cells(&self) -> *const Cell {
         self.cells.as_ptr()
     }
-    // pub fn cells(&mut self) -> *const u32 {
-    //     self.cells.as_slice().as_ptr()
-    // }
+
 }
 
 // impl fmt::Display for Universe {
