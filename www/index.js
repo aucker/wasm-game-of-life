@@ -86,6 +86,9 @@ const drawCells = () => {
 
 const renderLoop = () => {
     // pre.textContent = universe.render();
+    
+    debugger;
+
     universe.tick();
 
     drawGrid();
