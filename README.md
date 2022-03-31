@@ -41,6 +41,7 @@ cargo generate --git https://github.com/rustwasm/wasm-pack-template.git --name m
 cd my-project
 ```
 
+
 ### 🛠️ Build with `wasm-pack build`
 
 ```
