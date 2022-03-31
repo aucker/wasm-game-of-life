@@ -35,6 +35,15 @@ pub struct Universe {
     // cells: FixedBitSet,
 }
 
+impl Cell {
+    fn toggle(&mut self) {
+        *self = match *self {
+            Cell::Dead => Cell::Alive,
+            Cell::Alive => Cell::Dead,
+        };
+    }
+}
+
 impl Universe {
     
     /// Get the dead and alive values of the entire universe.
@@ -155,7 +164,14 @@ impl Universe {
         self.cells.as_ptr()
     }
 
+    pub fn toggle_cell(&mut self, row: u32, column: u32) {
+        let idx = self.get_index(row, column);
+        self.cells[idx].toggle();
+    }
+    // this method can be called by JavaScript
+
 }
+
 
 // impl fmt::Display for Universe {
 //     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
