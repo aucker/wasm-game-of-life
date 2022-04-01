@@ -40,5 +40,6 @@ features = [
 # https://github.com/rustwasm/wasm-bindgen/issues/1039
 
 [profile.release]
+lto = true
 # Tell `rustc` to optimize for small code size.
 opt-level = "s"
