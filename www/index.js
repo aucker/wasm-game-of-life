@@ -106,17 +106,37 @@ const drawCells = () => {
 
     ctx.beginPath();
 
+    // for (let row = 0; row < height; row++) {
+    //     for (let col = 0; col < width; col++) {
+    //         const idx = getIndex(row, col);
+
+    //         ctx.fillStyle = cells[idx] === Cell.Dead
+    //             ? DEAD_COLOR
+    //             : ALIVE_COLOR;
+    //         // ctx.fillStyle = bitIsSet(idx, cells)
+    //         //     ? ALIVE_COLOR
+    //         //     : DEAD_COLOR;
+            
+    //         ctx.fillRect(
+    //             col * (CELL_SIZE + 1) + 1,
+    //             row * (CELL_SIZE + 1) + 1,
+    //             CELL_SIZE,
+    //             CELL_SIZE
+    //         );
+    //     }
+    // }
+    // a very nice idea, in for loops, `fillStyle` consumes too much resources, instead of using for loop, 
+    // use only two passes, each pass draw correspond cells 
+
+    // Alive cells
+    ctx.fillStyle = ALIVE_COLOR;
     for (let row = 0; row < height; row++) {
         for (let col = 0; col < width; col++) {
             const idx = getIndex(row, col);
+            if (cells[idx] !== Cell.Alive) {
+                continue;
+            }
 
-            ctx.fillStyle = cells[idx] === Cell.Dead
-                ? DEAD_COLOR
-                : ALIVE_COLOR;
-            // ctx.fillStyle = bitIsSet(idx, cells)
-            //     ? ALIVE_COLOR
-            //     : DEAD_COLOR;
-            
             ctx.fillRect(
                 col * (CELL_SIZE + 1) + 1,
                 row * (CELL_SIZE + 1) + 1,
@@ -125,6 +145,24 @@ const drawCells = () => {
             );
         }
     }
+
+    // Dead cells
+    ctx.fillStyle = DEAD_COLOR;
+    for (let row = 0; row < height; row++) {
+        for (let col = 0; col < width; col++) {
+            const idx = getIndex(row, col);
+            if (cells[idx] !== Cell.Dead) {
+                continue;
+            }
+            ctx.fillRect(
+                col * (CELL_SIZE + 1) + 1,
+                row * (CELL_SIZE + 1) + 1,
+                CELL_SIZE,
+                CELL_SIZE
+            );
+        }
+    }
+
     ctx.stroke();
 };
 
