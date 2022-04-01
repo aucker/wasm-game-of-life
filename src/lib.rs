@@ -157,7 +157,7 @@ impl Universe {
         let _timer = Timer::new("Universe::tick");
         
         let mut next = {
-            let _time = Timer::new("allocate next cells");
+            let _timer = Timer::new("allocate next cells");
             self.cells.clone()
         };
         
